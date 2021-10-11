@@ -36,15 +36,18 @@ public class NoteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("edit") != null ){
+            getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
+        }
+        
         String path = getServletContext().getRealPath("/WEB-INF/Note.txt");
         // to read files
         BufferedReader br = new BufferedReader(new FileReader(new File(path)));
-        
         String title = br.readLine();
         String message = br.readLine();
         request.setAttribute("title",title );
         request.setAttribute("message",message );
-        
+        br.close();
     
         
         
@@ -66,10 +69,11 @@ public class NoteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String path = getServletContext().getRealPath("/WEB-INF/note.txt");
+        String path = getServletContext().getRealPath("/WEB-INF/Note.txt");
         String title = request.getParameter("title");
         String message = request.getParameter("message");
-        
+        request.setAttribute("title",title );
+        request.setAttribute("message",message );
         Note ok = new Note (title,message);
         // to write to a file
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false))); 

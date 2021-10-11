@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +21,7 @@
         <input type="text" name="title" value="${title}">
         <br>
         <label>Contents:</label>
-        <textarea rows="4" cols="50" name="comment" value="${comment}"></textarea>
+        <textarea rows="4" cols="50" name="message" value="${message}"></textarea>
         <br>
         <input type="submit" name="Save" value="Save">
         </form>
